@@ -1,0 +1,1 @@
+-- Quantum Vision Transformers El Amine Cherrat , et al. arXiv:2206.02381 [cs.LG] 2024
