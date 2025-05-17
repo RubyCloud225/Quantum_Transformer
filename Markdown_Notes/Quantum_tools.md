@@ -1,82 +1,48 @@
-# ✨ Quantum Tools in This Implementation
+*** Quantum Tools used in this implementation- 
 
-## 🔁 RBS Gate (Reversible Binary Switch Gate)
+RBS Gate : A Reversible Binary Switch gate is used to implement the quantum circuit. 
 
-The **RBS gate** is used to implement a quantum circuit with the following matrix representation:
+RBS(0) = ( 1    0   0       0)
+        (  0 cos(0) sin(0)  0)
+        (  0 -sin(0) cos(0) 0)
+        (  0    0       0   1)
 
-$$
-\text{RBS}(0) =
-\begin{pmatrix}
-1 & 0 & 0 & 0 \\
-0 & \cos(0) & \sin(0) & 0 \\
-0 & -\sin(0) & \cos(0) & 0 \\
-0 & 0 & 0 & 1
-\end{pmatrix}
-$$
+implemented by the hadamard gate and the controlled phase gate.
 
-This gate is **implemented using**:
-- The **Hadamard gate** (H)
-- The **Controlled Phase Rotation Gate** (specifically $$ R_y(\pm 0/2) $$)
+H -R_y(+0/2) H
+H - R_y(-0/2) H
+where H is the Hadamard gate and R_y(+0/2) is the controlled phase
 
-### Gate Decomposition:
-$$
-H - R_y(+0/2) - H
-$$
-$$
-H - R_y(-0/2) - H
-$$
+** Data loaders for Matrics 
 
-> Note: $$ R_y(\cdot) $$ refers to a rotation around the Y-axis on the Bloch sphere.
+load a whole matix X E R^nxd in a quantum state  - designed quantum circuits to load input vectors using N = n + d qubits. with a unary amplitude encoding.
 
----
+using a basis of states of hamming weight 1 where all qubits are in state 0 except one state which is in state 1. 
 
-## 📦 Data Loaders for Matrices
+number of gates is O(n + d)- this is extended to 
 
-To load an entire matrix $$ X \in \mathbb{R}^{n \times d} $$ into a quantum state, custom quantum circuits were designed using $$ N = n + d $$ qubits with **unary amplitude encoding**.
+-- pyramid nearest neighbor encoding where the depth is 2N - 3 number of gates is N(N-1)/2
 
-### Encoding Method:
-- Unary basis using **Hamming weight 1 states**:
-  - All qubits are in $$ |0\rangle $$ except one, which is in $$ |1\rangle $$.
-- Number of gates: $$ O(n + d) $$
+-- X Nearest Neighbour Depth N - 1 number of gates 2N - 3
 
-### Extended Encoding Methods:
+-- Butterfly All to all Depth Log(N) number of gates N/2 log(N)
 
-| Encoding Strategy                | Circuit Depth | Gate Count             |
-|----------------------------------|---------------|------------------------|
-| Pyramid Nearest Neighbor         | $$ 2N - 3 $$     | $$ \frac{N(N-1)}{2} $$   |
-| X Nearest Neighbor               | $$ N - 1 $$      | $$ 2N - 3 $$             |
-| Butterfly All-to-All             | $$ \log N $$     | $$ \frac{N}{2} \log N $$ |
+the resulting state is a superposition of all possible input vectors.
 
-### Final Quantum State:
-$$
-|X\rangle = \frac{1}{\|x\|} \sum_{i=1}^{n} \sum_{j=1}^{d} x_{ij} |e_j\rangle |e_i\rangle
-$$
+| X > = 1/||x|| * sum_{i=1{n}}sum_{j=1{d}}{x_ij || e_j > | e_i >}
 
-This forms a **superposition over all input vectors**.
+** Quantum Orthogonal Layers 
+- quantum circuit applied to a state | x > (encoded in the unary basis) 
 
----
+two types of new layers (in addition to pyramid) 
+- X circuit
+        -- smaller number of gates 
+        -- less expressive with restrained set of possible orthogonal matrices but fewer trainable params ( may not be suitable given the level of control over params I want this may make that difficult and complex )
+- butterfly
+        -- logarithmic circuit depth 
+        -- linear number of gates 
+        -- higher level of expressivity
 
-## 🌀 Quantum Orthogonal Layers
+vector is loaded as a quantum state using only N qubits - output with encoded vector orthogonal to input vector
 
-These are quantum circuits applied to the state $$ |x\rangle $$, encoded in the **unary basis**.
-
-### Types of Layers:
-
-#### 1. **X Circuit**  
-- Fewer gates  
-- Less expressive (limited orthogonal matrices)  
-- Fewer trainable parameters  
-- ⚠️ May not allow fine-grained parameter control
-
-#### 2. **Butterfly Circuit**  
-- Logarithmic circuit depth  
-- Linear gate count  
-- ✅ Higher expressivity
-
----
-
-## 📈 Summary
-
-- Vectors are loaded into quantum states using only $$ N $$ qubits.
-- The output state is an **orthogonal transformation** of the input.
-- Matrix $$ V $$ represents an **expansion in Hamming weight basis** $$ k $$.
+V is seen here as an expansion of V in the hamming weight bias (k) turn this into a presentable markdown
