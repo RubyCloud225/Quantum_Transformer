@@ -32,31 +32,12 @@ $$
 
 ## 📦 Data Loaders for Matrices
 
-To load an entire matrix 
-$$ 
-X \in \mathbb{R}^{n \times d} 
-$$ 
-into a quantum state, custom quantum circuits were designed using $$ 
-N = n + d 
-$$ 
-qubits with **unary amplitude encoding**.
+To load an entire matrix $$ X \in \mathbb{R}^{n \times d} $$ into a quantum state, custom quantum circuits were designed using $$ N = n + d $$ qubits with **unary amplitude encoding**.
 
 ### Encoding Method:
 - Unary basis using **Hamming weight 1 states**:
-  - All qubits are in 
-  
-$$ 
-|0\rangle 
-$$ 
-except one, which is in 
-$$ 
-|1\rangle 
-$$.
-
-- Number of gates: 
-$$ 
-O(n + d) 
-$$
+  - All qubits are in $$ |0\rangle $$ except one, which is in $$ |1\rangle $$.
+- Number of gates: $$ O(n + d) $$
 
 ### Extended Encoding Methods:
 
@@ -96,17 +77,6 @@ These are quantum circuits applied to the state $$ |x\rangle $$, encoded in the 
 
 ## 📈 Summary
 
-- Vectors are loaded into quantum states using only 
-$$ 
-N 
-$$
- qubits.
+- Vectors are loaded into quantum states using only $$ N $$ qubits.
 - The output state is an **orthogonal transformation** of the input.
-- Matrix 
-$$ 
-V 
-$$ 
-represents an **expansion in Hamming weight basis** 
-$$ 
-k 
-$$.
+- Matrix $$ V $$ represents an **expansion in Hamming weight basis** $$ k $$.
