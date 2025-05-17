@@ -19,10 +19,10 @@ This gate is **implemented using**:
 - The **Controlled Phase Rotation Gate** (specifically $$ R_y(\pm 0/2) $$)
 
 ### Gate Decomposition:
-- $$
+$$
 H - R_y(+0/2) - H
 $$
-- $$
+$$
 H - R_y(-0/2) - H
 $$
 
@@ -36,8 +36,12 @@ To load an entire matrix $$ X \in \mathbb{R}^{n \times d} $$ into a quantum stat
 
 ### Encoding Method:
 - Unary basis using **Hamming weight 1 states**:
-  - All qubits are in $$ |0\rangle $$ except one, which is in $$ |1\rangle $$.
-- Number of gates: $$ O(n + d) $$
+  - All qubits are in 
+  
+$$ |0\rangle $$ except one, which is in $$ |1\rangle $$.
+
+- Number of gates: 
+$$ O(n + d) $$
 
 ### Extended Encoding Methods:
 
